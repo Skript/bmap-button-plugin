@@ -15,6 +15,10 @@ var BMAP = {
 		buttonClassName: 'bmap-add-button',
 		lang: (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2) == 'ru' ? 'ru' : 'en',
 	},
+	defaultTitle: {
+		ru: 'Добавить продукты в список',
+		en: 'Add ingredients to shopping list'
+	},
 	sms_text: {
 		ru: 'Добавьте ингредиенты в "Купи батон!"',
 		en: 'Add ingredients to "Buy Mea Pie!"'
@@ -58,9 +62,9 @@ var BMAP = {
 	    }
 	},
 	makeButton: function(buttonContainer){
-		var button_text = buttonContainer.innerText;
+		var buttonTitle = buttonContainer.getAttribute('button-title')||this.defaultTitle[this.options.lang];
 		var recipe_id = buttonContainer.getAttribute("recipe_id");
-		buttonContainer.innerHTML = '<a href="" id="bmap_'+recipe_id+'" class="compose-export-button" target="_blank">'+button_text+'</a>';
+		buttonContainer.innerHTML = '<a href="" id="bmap_'+recipe_id+'" class="compose-export-button" target="_blank">'+buttonTitle+'</a>';
 		this.makeRecipeList(recipe_id)
 	},
 	makeRecipeList: function(recipe_id){
