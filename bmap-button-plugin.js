@@ -63,7 +63,7 @@ var BMAP = {
 	},
 	makeButton: function(buttonContainer){
 		var buttonTitle = buttonContainer.getAttribute('button-title')||this.defaultTitle[this.options.lang];
-		var recipe_id = buttonContainer.getAttribute("recipe_id");
+		var recipe_id = buttonContainer.getAttribute("recipe-id");
 		buttonContainer.innerHTML = '<a href="" id="bmap_'+recipe_id+'" class="compose-export-button" target="_blank">'+buttonTitle+'</a>';
 		this.makeRecipeList(recipe_id)
 	},
