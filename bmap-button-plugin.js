@@ -146,10 +146,10 @@ var BMAP = {
                     overlayDialog.classList.remove('dialog-shown');
                 });
             }
+            self.drawButtons();
         });
-        this.apply();
     },
-    apply: function(){
+    drawButtons: function(){
         var buttonsCollection = document.getElementsByClassName(this.options.buttonClassName);
         for (var i = buttonsCollection.length - 1; i >= 0; i--) {
             this.makeButton(buttonsCollection[i]);
