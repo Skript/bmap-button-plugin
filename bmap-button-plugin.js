@@ -12,7 +12,7 @@ var BMAP = {
     },
     sms_text: {
         ru: 'Добавьте ингредиенты в "Купи батон!"',
-        en: 'Add ingredients to "Buy Mea Pie!"'
+        en: 'Add ingredients to "Buy Me a Pie!"'
     },
     css: '\
         .bmap-export-button-link,\
