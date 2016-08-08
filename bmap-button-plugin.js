@@ -112,21 +112,24 @@ var BMAP = {
       }
       return target;
     },
-    waitFor: function(obj, prop, func, count) {
-        if (obj[prop]) {
+    domReady: function() {
+        return 'readyState' in document ? /loaded|complete/.test(document.readyState) : !!document.body;
+    },
+    onDomReady: function(self, func, count) {
+        if (self.domReady()) {
             func.apply();
         } else {
             count = count || 0;
             if (count < 1000) setTimeout(function() {
-                this.waitFor(obj, prop, func, count + 1)
-            }, 0);
+                self.onDomReady(self, func, count + 1)
+            }, 10);
         }
     },
     init: function(options){
         this.extend(this.options, options, true);
         branch.init(this.options.branchKey);
         var self = this;
-        this.waitFor(document, 'body', function() {
+        this.onDomReady(self, function() {
             var node = document.createElement("style");
             var textnode = document.createTextNode(self.css);
             node.appendChild(textnode);
@@ -143,7 +146,7 @@ var BMAP = {
                     overlayDialog.classList.remove('dialog-shown');
                 });
             }
-          });
+        });
         this.apply();
     },
     apply: function(){
