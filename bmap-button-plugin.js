@@ -3,7 +3,7 @@
 var BMAP = {
     options: {
         branchKey:'key_live_blf8cbCOBIE1a7eFuCgqFfhdvDpODoZa',
-        buttonClassName: 'bmap-add-button',
+        buttonClassName: 'bmap-export-button',
         lang: (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2) == 'ru' ? 'ru' : 'en',
     },
     defaultTitle: {
@@ -15,10 +15,10 @@ var BMAP = {
         en: 'Add ingredients to "Buy Mea Pie!"'
     },
     css: '\
-        .compose-export-button,\
-        .compose-export-button:visited,\
-        .compose-export-button:active,\
-        .compose-export-button:focus {\
+        .bmap-export-button-link,\
+        .bmap-export-button-link:visited,\
+        .bmap-export-button-link:active,\
+        .bmap-export-button-link:focus {\
             color: #fff !important;\
             margin: 20px auto;\
             position: relative;\
@@ -34,12 +34,12 @@ var BMAP = {
             box-shadow: none;\
             border-radius: 3px;\
         }\
-        .compose-export-button:hover {\
+        .bmap-export-button-link:hover {\
             color: #fff !important;\
             text-decoration: none;\
             background-color: #40b0ff;\
         }\
-#compose-export-button-overlay-dialog {\
+        #bmap-export-button-overlay-dialog {\
             background-color: rgba(255, 255, 255, 0.75);\
             display: none;\
             height: 100%;\
@@ -49,8 +49,8 @@ var BMAP = {
             width: 100%;\
             z-index: 10000;\
         }\
-#compose-export-button-overlay-dialog.dialog-shown { display: table; }\
-        .compose-export-button-dialog {\
+        #bmap-export-button-overlay-dialog.dialog-shown { display: table; }\
+        .bmap-export-button-dialog {\
             display: inline-block;\
             height: 468px;\
             width: 840px;\
@@ -65,12 +65,12 @@ var BMAP = {
             z-index: 100000;\
             box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);\
         }\
-        .compose-export-button-dialog-wrapper  {\
+        .bmap-export-button-dialog-wrapper  {\
             display: table-cell;\
             text-align: center !important;\
             vertical-align: middle !important;\
         }\
-        .compose-export-button-dialog .compose-export-button-iframe {\
+        .bmap-export-button-dialog .bmap-export-button-iframe {\
             border: medium none;\
             box-sizing: border-box;\
             height: 100%;\
@@ -82,7 +82,7 @@ var BMAP = {
             width: 100%;\
             max-width: inherit !important;\
         }\
-        .compose-export-button-dialog #compose-export-button-close {\
+        .bmap-export-button-dialog #bmap-export-button-close {\
             cursor: pointer;\
             position: absolute;\
             right: 10px;\
@@ -99,7 +99,7 @@ var BMAP = {
             line-height: 40px;\
             text-align: center;\
         }\
-        .compose-export-button-dialog #compose-export-button-close:hover {\
+        .bmap-export-button-dialog #bmap-export-button-close:hover {\
             background-color: #eee;\
         }\
     ',
@@ -137,11 +137,11 @@ var BMAP = {
 
             if (!self.mobile) {
                 var overlayDialog = document.createElement("div");
-                overlayDialog.setAttribute('id','compose-export-button-overlay-dialog');
-                overlayDialog.innerHTML='<div class="compose-export-button-dialog-wrapper"><div class="compose-export-button-dialog"><div id="compose-export-button-close">✕</div><iframe src="" id="compose-export-button-iframe" class="compose-export-button-iframe"></iframe></div></div>';
+                overlayDialog.setAttribute('id','bmap-export-button-overlay-dialog');
+                overlayDialog.innerHTML='<div class="bmap-export-button-dialog-wrapper"><div class="bmap-export-button-dialog"><div id="bmap-export-button-close">✕</div><iframe src="" id="bmap-export-button-iframe" class="bmap-export-button-iframe"></iframe></div></div>';
                 document.getElementsByTagName('BODY')[0].appendChild(overlayDialog);
                 overlayDialog.addEventListener('click',function(){overlayDialog.classList.remove('dialog-shown')});
-                document.getElementById('compose-export-button-close').addEventListener('click',function(event){
+                document.getElementById('bmap-export-button-close').addEventListener('click',function(event){
                     event.preventDefault();
                     overlayDialog.classList.remove('dialog-shown');
                 });
@@ -158,7 +158,7 @@ var BMAP = {
     makeButton: function(buttonContainer){
         var buttonTitle = buttonContainer.getAttribute('button-title')||this.defaultTitle[this.options.lang];
         var recipe_id = buttonContainer.getAttribute('recipe-id');
-        buttonContainer.innerHTML = '<a href="javascript:void(0);" class="compose-export-button" target="_blank">'+buttonTitle+'</a>';
+        buttonContainer.innerHTML = '<a href="javascript:void(0);" class="bmap-export-button-link" target="_blank">'+buttonTitle+'</a>';
         this.makeRecipeList(buttonContainer, recipe_id)
     },
     makeRecipeList: function(button, recipe_id){
@@ -187,11 +187,11 @@ var BMAP = {
 
         var a = button.childNodes[0];
         if (!this.mobile) {
-            var overlayDialog = document.getElementById('compose-export-button-overlay-dialog');
+            var overlayDialog = document.getElementById('bmap-export-button-overlay-dialog');
             a.addEventListener('click',function(event){
                 event.preventDefault();
                 var link = a.getAttribute('href');
-                document.getElementById('compose-export-button-iframe').setAttribute('src',link);
+                document.getElementById('bmap-export-button-iframe').setAttribute('src',link);
                 overlayDialog.classList.add('dialog-shown');
             });
         }
