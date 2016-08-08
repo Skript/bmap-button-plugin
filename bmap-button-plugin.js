@@ -63,14 +63,18 @@ var BMAP = {
     },
     makeButton: function(buttonContainer){
         var buttonTitle = buttonContainer.getAttribute('button-title')||this.defaultTitle[this.options.lang];
-        var recipe_id = buttonContainer.getAttribute("recipe-id");
-        buttonContainer.innerHTML = '<a href="" id="bmap_'+recipe_id+'" class="compose-export-button" target="_blank">'+buttonTitle+'</a>';
-        this.makeRecipeList(recipe_id)
+        var recipe_id = buttonContainer.getAttribute('recipe-id');
+        buttonContainer.innerHTML = '<a href="javascript:void(0);" class="compose-export-button" target="_blank">'+buttonTitle+'</a>';
+        this.makeRecipeList(buttonContainer, recipe_id)
     },
-    makeRecipeList: function(recipe_id){
+    makeRecipeList: function(button, recipe_id){
         var self = this;
-        var button = document.getElementById('bmap_' + recipe_id);
-        var recipe = document.getElementById(recipe_id);
+        var recipe;
+        if (recipe_id) {
+            recipe = document.getElementById(recipe_id);
+        } else {
+            recipe = document.querySelector('[itemtype="http://schema.org/Recipe"]');
+        }
         if (!recipe) return;
         var items = [];
         var title, amount, item;
@@ -88,11 +92,12 @@ var BMAP = {
         export_data['$desktop_deepview'] = 'import_ingredients_' + this.options.lang;
         export_data['$custom_sms_text'] =  this.sms_text[this.options.lang] + ' {{ link }}';
 
-        if (!self.mobile) {
+        var a = button.childNodes[0];
+        if (!this.mobile) {
             var overlayDialog = document.getElementById('compose-export-button-overlay-dialog');
-            button.addEventListener('click',function(event){
+            a.addEventListener('click',function(event){
                 event.preventDefault();
-                var link = button.getAttribute('href');
+                var link = a.getAttribute('href');
                 document.getElementById('compose-export-button-iframe').setAttribute('src',link);
                 overlayDialog.classList.add('dialog-shown');
             });
