@@ -198,7 +198,7 @@ var BMAP = {
 
         branch.link({
             campaign: 'Partners',
-            channel: 'partner site',
+            channel: 'bmap-js-plugin',
             tags: ['import', document.location.host],
             feature: 'import',
             stage: '',
