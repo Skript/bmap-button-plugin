@@ -28,4 +28,4 @@ The button will allow a user to export ingredients from the recipe to the [Buy M
   <div class="bmap-export-button"></div>
   ```
 
-See [example](example/recipe.html).
+Also see [an example](example/recipe.html).
