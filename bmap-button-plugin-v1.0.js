@@ -157,7 +157,7 @@ var BMAP = {
     },
     makeButton: function(buttonContainer){
         var buttonTitle = buttonContainer.getAttribute('button-title')||this.defaultTitle[this.options.lang];
-        var recipe_id = buttonContainer.getAttribute('recipe-id');
+        var recipe_id = buttonContainer.getAttribute('data-recipe-id');
         buttonContainer.innerHTML = '<a href="javascript:void(0);" class="bmap-export-button-link" target="_blank">'+buttonTitle+'</a>';
         this.makeRecipeList(buttonContainer, recipe_id)
     },
