@@ -16,7 +16,7 @@ The button will allow a user to export ingredients from the recipe to the [Buy M
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) {return;}
           js = d.createElement(s); js.id = id;
-          js.src = "//buymeapie.com/js/plugins/bmap-button-plugin-v1.0.js";
+          js.src = "//buymeapie.com/javascripts/plugins/bmap-button-plugin.v1.0.js";
           fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'bmap-button-plugin'));
   </script>
@@ -48,7 +48,7 @@ You can pass configuration parameters into `BMAP.init()` function as shown below
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) {return;}
           js = d.createElement(s); js.id = id;
-          js.src = "//buymeapie.com/js/plugins/bmap-button-plugin.latest.js";
+          js.src = "//buymeapie.com/javascripts/plugins/bmap-button-plugin.v1.0.js";
           fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'bmap-button-plugin'));
   </script>
