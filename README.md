@@ -36,30 +36,44 @@ Also see an example: [source](examples/recipe.html), [live](https://s0.buymeapie
 
 ### Configuration parameters
 
+#### Global parameters
+
 You can pass configuration parameters into `BMAP.init()` function as shown below:
 
-  ```html
-  <script type="text/javascript">
-      window.bmapAsyncInit = function() {
-          BMAP.init({
-              lang: 'ru',
-              buttonClassName: 'bmap-export-button'
-          });
-      };
-      (function(d, s, id){
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) {return;}
-          js = d.createElement(s); js.id = id;
-          js.src = "//buymeapie.com/javascripts/plugins/bmap-button-plugin.v1.js";
-          fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'bmap-button-plugin'));
-  </script>
-  ```
+```html
+<script type="text/javascript">
+    window.bmapAsyncInit = function() {
+        BMAP.init({
+            lang: 'ru',
+            buttonClassName: 'bmap-export-button'
+        });
+    };
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//buymeapie.com/javascripts/plugins/bmap-button-plugin.v1.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'bmap-button-plugin'));
+</script>
+```
 
 Available parameters:
 
 * `lang` - language to use. Supported values: `en`, `ru`. By default the plugin tries to obtain the language from the browser.
 * `buttonClassName` - a class name of the DOM objects to search on the page and draw a button inside. Default: `bmap-export-button`.
+
+#### Button-specific parameters
+
+You can specify button-specific parameters as attributes to a button container:
+
+```html
+<div class="bmap-export-button" data-button-title="Custom Button Title"></div>
+```
+
+At the moment only one parameter is supported:
+
+* `data-button-title` - a button title.
 
 ### Multiple recipes on the page
 

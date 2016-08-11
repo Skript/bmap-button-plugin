@@ -157,7 +157,7 @@ var BMAP = {
         }
     },
     makeButton: function(buttonContainer){
-        var buttonTitle = buttonContainer.getAttribute('button-title')||this.defaultTitle[this.options.lang];
+        var buttonTitle = buttonContainer.getAttribute('data-button-title')||this.defaultTitle[this.options.lang];
         var recipe_id = buttonContainer.getAttribute('data-recipe-id');
         buttonContainer.innerHTML = '<a href="javascript:void(0);" class="bmap-export-button-link" target="_blank">'+buttonTitle+'</a>';
         this.makeButtonLink(buttonContainer, recipe_id)
