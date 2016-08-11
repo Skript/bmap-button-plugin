@@ -49,7 +49,7 @@ var BMAP = {
             width: 100%;\
             z-index: 10000;\
         }\
-        #bmap-export-button-overlay-dialog.dialog-shown { display: table; }\
+        #bmap-export-button-overlay-dialog.bmap-export-button-dialog-shown { display: table; }\
         .bmap-export-button-dialog {\
             display: inline-block;\
             height: 468px;\
@@ -140,10 +140,10 @@ var BMAP = {
                 overlayDialog.setAttribute('id','bmap-export-button-overlay-dialog');
                 overlayDialog.innerHTML='<div class="bmap-export-button-dialog-wrapper"><div class="bmap-export-button-dialog"><div id="bmap-export-button-close">✕</div><iframe src="" id="bmap-export-button-iframe" class="bmap-export-button-iframe"></iframe></div></div>';
                 document.getElementsByTagName('BODY')[0].appendChild(overlayDialog);
-                overlayDialog.addEventListener('click',function(){overlayDialog.classList.remove('dialog-shown')});
+                overlayDialog.addEventListener('click',function(){overlayDialog.classList.remove('bmap-export-button-dialog-shown')});
                 document.getElementById('bmap-export-button-close').addEventListener('click',function(event){
                     event.preventDefault();
-                    overlayDialog.classList.remove('dialog-shown');
+                    overlayDialog.classList.remove('bmap-export-button-dialog-shown');
                 });
             }
             self.drawButtons();
@@ -159,9 +159,9 @@ var BMAP = {
         var buttonTitle = buttonContainer.getAttribute('button-title')||this.defaultTitle[this.options.lang];
         var recipe_id = buttonContainer.getAttribute('data-recipe-id');
         buttonContainer.innerHTML = '<a href="javascript:void(0);" class="bmap-export-button-link" target="_blank">'+buttonTitle+'</a>';
-        this.makeRecipeList(buttonContainer, recipe_id)
+        this.makeButtonLink(buttonContainer, recipe_id)
     },
-    makeRecipeList: function(button, recipe_id){
+    makeButtonLink: function(button, recipe_id){
         var recipe;
         if (recipe_id) {
             recipe = document.getElementById(recipe_id);
@@ -185,17 +185,7 @@ var BMAP = {
         export_data['$desktop_deepview'] = 'import_ingredients_' + this.options.lang;
         export_data['$custom_sms_text'] =  this.sms_text[this.options.lang] + ' {{ link }}';
 
-        var a = button.childNodes[0];
-        if (!this.mobile) {
-            var overlayDialog = document.getElementById('bmap-export-button-overlay-dialog');
-            a.addEventListener('click',function(event){
-                event.preventDefault();
-                var link = a.getAttribute('href');
-                document.getElementById('bmap-export-button-iframe').setAttribute('src',link);
-                overlayDialog.classList.add('dialog-shown');
-            });
-        }
-
+        var self = this;
         branch.link({
             campaign: 'Partners',
             channel: 'bmap-js-plugin',
@@ -204,8 +194,24 @@ var BMAP = {
             stage: '',
             data: export_data
         }, function(err, link) {
-            a.setAttribute('href',link);
+            self.setupButtonLink(button, link);
         })
+    },
+    setupButtonLink: function(button, link) {
+        var a = button.childNodes[0];
+        a.setAttribute('href',link);
+        if (!this.mobile) {
+            var overlayDialog = document.getElementById('bmap-export-button-overlay-dialog');
+            a.addEventListener('click',function(event){
+                event.preventDefault();
+                var link = a.getAttribute('href');
+                var iframe = document.getElementById('bmap-export-button-iframe');
+                if (iframe.getAttribute('src') != link) {
+                    document.getElementById('bmap-export-button-iframe').setAttribute('src',link);
+                }
+                overlayDialog.classList.add('bmap-export-button-dialog-shown');
+            });
+        }
     }
 };
 
