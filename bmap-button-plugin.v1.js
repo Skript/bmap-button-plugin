@@ -19,14 +19,15 @@ var BMAP = {
         .bmap-export-button-link:visited,\
         .bmap-export-button-link:active,\
         .bmap-export-button-link:focus {\
-            color: #fff !important;\
+            color: #fff;\
             margin: 20px auto;\
             position: relative;\
             cursor: pointer;\
             text-align: center;\
             vertical-align: middle;\
+            white-space: nowrap;\
             display: inline-block;\
-            text-decoration: none !important;\
+            text-decoration: none;\
             line-height: 40px;\
             background: url(https://buymeapie.com/images/logo.png) no-repeat 10px 50% #0095ff;\
             background-size: 32px;\
