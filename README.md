@@ -3,7 +3,7 @@
 This is a javascript plugin that adds a button to your web pages containing [Schema-structured](https://schema.org/Recipe) recipes.
 The button will allow a user to export ingredients from the recipe to the [Buy Me a Pie! App](http://buymeapie.com/).
 
-See [an example](https://s0.buymeapie.com/examples/bmap-button-plugin.html).
+See [an example](https://buymeapie.com/examples/bmap-button-plugin.html).
 
 ## Simple installation
 
@@ -30,7 +30,7 @@ See [an example](https://s0.buymeapie.com/examples/bmap-button-plugin.html).
   <div class="bmap-export-button"></div>
   ```
 
-Also see an example: [source](examples/recipe.html), [live](https://s0.buymeapie.com/examples/bmap-button-plugin.html).
+Also see an example: [source](examples/recipe.html), [live](https://buymeapie.com/examples/bmap-button-plugin.html).
 
 ## Advanced installation
 
