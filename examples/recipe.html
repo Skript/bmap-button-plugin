@@ -11,7 +11,10 @@
 
 <script type="text/javascript">
     window.bmapAsyncInit = function() {
-        BMAP.init();
+        BMAP.init({
+          itemTitleClassName: 'item_name',
+          itemAmountClassName: 'item_count'
+        });
     };
     (function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -40,12 +43,12 @@
     <div>
       <h3> Ingredients</h3>
        <ul>
-        <li itemprop="ingredients">1 pita bread round</li>
-        <li itemprop="ingredients">5 ml olive oil</li>
-        <li itemprop="ingredients">45 ml pizza sauce</li>
-        <li itemprop="ingredients">55 g shredded mozzarella cheese</li>
-        <li itemprop="ingredients">25 g sliced crimini mushrooms</li>
-        <li itemprop="ingredients">0.7 g garlic salt</li>
+        <li itemprop="ingredients"><span class="item_count">1 pita</span> <span class="item_name">bread round</span></li>
+        <li itemprop="ingredients"><span class="item_count">5 ml</span> <span class="item_name">olive oil</span></li>
+        <li itemprop="ingredients"><span class="item_count">45 ml</span> <span class="item_name">pizza sauce</span></li>
+        <li itemprop="ingredients"><span class="item_count">55 g</span> <span class="item_name">shredded mozzarella cheese</span></li>
+        <li itemprop="ingredients"><span class="item_count">25 g</span> <span class="item_name">sliced crimini mushrooms</span></li>
+        <li itemprop="ingredients"><span class="item_count">0.7 g</span> <span class="item_name">garlic salt</span></li>
        </ul>
     </div>
 

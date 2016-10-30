@@ -4,6 +4,8 @@ var BMAP = {
     options: {
         branchKey:'key_live_blf8cbCOBIE1a7eFuCgqFfhdvDpODoZa',
         buttonClassName: 'bmap-export-button',
+        itemTitleClassName: '',
+        itemAmountClassName: '',
         lang: (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2) == 'ru' ? 'ru' : 'en',
     },
     defaultTitle: {
@@ -174,11 +176,31 @@ var BMAP = {
         var title, amount, item;
         var name = recipe.querySelector('[itemprop=name]').innerText;
         var itemCollection = recipe.querySelectorAll('[itemprop=ingredients]');
-        for (var i = itemCollection.length - 1; i >= 0; i--) {
-            item = itemCollection[i].innerText.split('\n');
-            title = item[0];
-            amount = item[1]||'';
-            items.push({"name":title,"amount":amount,"group":0});
+        var item;
+
+        if (this.options.itemTitleClassName && this.options.itemAmountClassName) {
+            for (var i = itemCollection.length - 1; i >= 0; i--) {
+                if (itemCollection[i].querySelector('.' + this.options.itemTitleClassName) && itemCollection[i].querySelector('.' + this.options.itemAmountClassName)) {
+                    item = {
+                        name: itemCollection[i].querySelector('.' + this.options.itemTitleClassName).innerText,
+                        amount: itemCollection[i].querySelector('.' + this.options.itemAmountClassName).innerText||'',
+                        group: 0
+                    }
+                } else {
+                    item = get_item(itemCollection[i]);
+                }
+                items.push(item);
+            }
+        } else {
+            for (var i = itemCollection.length - 1; i >= 0; i--) {
+                item = get_item(itemCollection[i]);
+                items.push(item);
+            }
+        }
+
+        function get_item(item){
+            item = item.innerText.split('\n');
+            return {title: item[0], amount: item[1]||'', group: 0};
         }
 
         var export_data = {};

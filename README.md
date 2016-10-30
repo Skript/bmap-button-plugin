@@ -62,6 +62,9 @@ Available parameters:
 
 * `lang` - language to use. Supported values: `en`, `ru`. By default the plugin tries to obtain the language from the browser.
 * `buttonClassName` - a class name of the DOM objects to search on the page and draw a button inside. Default: `bmap-export-button`.
+* `itemTitleClassName` - a class of the DOM objects to search in the recipe for ingredient title.
+* `itemAmountClassName` - a class of the DOM objects to search in the recipe for ingredient amount
+.
 
 #### Button-specific parameters
 
