@@ -4,8 +4,6 @@ var BMAP = {
     options: {
         branchKey:'key_live_blf8cbCOBIE1a7eFuCgqFfhdvDpODoZa',
         buttonClassName: 'bmap-export-button',
-        itemTitleClassName: 'item_name',
-        itemAmountClassName: 'item_count',
         lang: (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2) == 'ru' ? 'ru' : 'en',
     },
     defaultTitle: {
@@ -173,38 +171,25 @@ var BMAP = {
         }
         if (!recipe) return;
         var items = [];
-        var title, amount, item;
-        var name = recipe.querySelector('[itemprop=name]').innerText;
-        var itemCollection = recipe.querySelectorAll('[itemprop=ingredients]');
-        var item;
+        var name, amount, item;
+        var recipe_name = recipe.querySelector('[itemprop=name]').innerText;
+        var itemCollection = recipe.querySelectorAll('[itemprop=ingredients],[itemprop=recipeIngredient]');
 
-        if (this.options.itemTitleClassName && this.options.itemAmountClassName) {
-            for (var i = itemCollection.length - 1; i >= 0; i--) {
-                if (itemCollection[i].querySelector('.' + this.options.itemTitleClassName) && itemCollection[i].querySelector('.' + this.options.itemAmountClassName)) {
-                    item = {
-                        name: itemCollection[i].querySelector('.' + this.options.itemTitleClassName).innerText,
-                        amount: itemCollection[i].querySelector('.' + this.options.itemAmountClassName).innerText||'',
-                        group: 0
-                    }
-                } else {
-                    item = get_item(itemCollection[i]);
-                }
-                items.push(item);
+        for (var i = itemCollection.length - 1; i >= 0; i--) {
+            name = itemCollection[i].querySelector('[itemprop=name]');
+            amount = itemCollection[i].querySelector('[itemprop=amount]');
+            if ( name && amount ) {
+                item = { name: name.innerText, amount: amount.innerText || '', group: 0 }
+            } else {
+                //TODO: parse name & amount
+                item = itemCollection[i].innerText.split('\n');
+                item = { name: item[0], amount: item[1]||'', group: 0 }
             }
-        } else {
-            for (var i = itemCollection.length - 1; i >= 0; i--) {
-                item = get_item(itemCollection[i]);
-                items.push(item);
-            }
-        }
-
-        function get_item(item){
-            item = item.innerText.split('\n');
-            return {title: item[0], amount: item[1]||'', group: 0};
+            items.push(item);
         }
 
         var export_data = {};
-        export_data['lists'] = [{"name":name,"active":true,"items":items}];
+        export_data['lists'] = [{"name":recipe_name,"active":true,"items":items}];
         export_data['$desktop_deepview'] = 'import_ingredients_' + this.options.lang;
         export_data['$custom_sms_text'] =  this.sms_text[this.options.lang] + ' {{ link }}';
 
