@@ -38,7 +38,7 @@ var BMAP = {
             border-radius: 3px;\
         }\
         .bmap-export-button-link:hover {\
-            color: #fff !important;\
+            color: #fff;\
             text-decoration: none;\
             background-color: #40b0ff;\
         }\
