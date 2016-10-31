@@ -4,8 +4,8 @@ var BMAP = {
     options: {
         branchKey:'key_live_blf8cbCOBIE1a7eFuCgqFfhdvDpODoZa',
         buttonClassName: 'bmap-export-button',
-        itemTitleClassName: '',
-        itemAmountClassName: '',
+        itemTitleClassName: 'item_name',
+        itemAmountClassName: 'item_count',
         lang: (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2) == 'ru' ? 'ru' : 'en',
     },
     defaultTitle: {
