@@ -102,9 +102,9 @@ want to draw a button for each of them, you need to link the button containers a
 
 ### Providing ingredient name & amount
 
-[Recipe microformat](https://schema.org/Recipe) prescribes that an ingredient should be placed in the field `recipeIngredient` or `ingredients`. It usually contains a string like "5 ml olive oil". We exentd the recipe microformat with two fields where you can put an ingredient name and its amount. This way a user can export a more detailed recipe. Here is an example of the recipe markup:
+[Recipe microformat](https://schema.org/Recipe) prescribes that an ingredient should be placed in the field `recipeIngredient` or `ingredients`. It usually contains a string like "5 ml olive oil". We extend the recipe microformat with two fields where you can put an ingredient name and its amount. This way a user can export a more detailed recipe. Here is an example of the recipe markup:
 
-```
+```html
  ...
  Ingredients:
   - <span itemprop="recipeIngredient"><span itemprop="amount">5 ml</span> <span itemprop="name">olive oil</span></span>
