@@ -62,9 +62,6 @@ Available parameters:
 
 * `lang` - language to use. Supported values: `en`, `ru`. By default the plugin tries to obtain the language from the browser.
 * `buttonClassName` - a class name of the DOM objects to search on the page and draw a button inside. Default: `bmap-export-button`.
-* `itemTitleClassName` - a class of the DOM objects to search in the recipe for ingredient title.
-* `itemAmountClassName` - a class of the DOM objects to search in the recipe for ingredient amount
-.
 
 #### Button-specific parameters
 
@@ -102,3 +99,17 @@ want to draw a button for each of them, you need to link the button containers a
 
 <div class="bmap-export-button" data-recipe-id="recipe-2"></div>
 ```
+
+### Providing ingredient name & amount
+
+[Recipe microformat](https://schema.org/Recipe) prescribes that an ingredient should be placed in the field `recipeIngredient` or `ingredients`. It usually contains a string like "5 ml olive oil". We extend the recipe microformat with two fields where you can put an ingredient name and its amount. This way a user can export a more detailed recipe. Here is an example of the recipe markup:
+
+```html
+ ...
+ Ingredients:
+  - <span itemprop="recipeIngredient"><span itemprop="amount">5 ml</span> <span itemprop="name">olive oil</span></span>
+  - <span itemprop="recipeIngredient"><span itemprop="amount">3/4 cup</span> <span itemprop="name">sugar</span></span>
+ ...
+```
+
+See the full example [here](examples/recipe.html).
