@@ -192,6 +192,8 @@ var BMAP = {
         export_data['lists'] = [{"name":recipe_name,"active":true,"items":items}];
         export_data['$desktop_deepview'] = 'import_ingredients_' + this.options.lang;
         export_data['$custom_sms_text'] =  this.sms_text[this.options.lang] + ' {{ link }}';
+        export_data['type'] = 'recipe';
+        export_data['sourceUrl'] = document.location.href;
 
         var self = this;
         branch.link({
