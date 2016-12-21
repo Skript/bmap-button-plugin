@@ -176,8 +176,8 @@ var BMAP = {
         var itemCollection = recipe.querySelectorAll('[itemprop=ingredients],[itemprop=recipeIngredient]');
 
         for (var i = itemCollection.length - 1; i >= 0; i--) {
-            name = itemCollection[i].querySelector('[itemprop=name]');
-            amount = itemCollection[i].querySelector('[itemprop=amount]');
+            name = itemCollection[i].querySelector('[itemprop=name],.item_name');
+            amount = itemCollection[i].querySelector('[itemprop=amount],.item_count');
             if ( name && amount ) {
                 item = { name: name.innerText, amount: amount.innerText || '', group: 0 }
             } else {
