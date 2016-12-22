@@ -4,7 +4,7 @@ var BMAP = {
     options: {
         branchKey:'key_live_blf8cbCOBIE1a7eFuCgqFfhdvDpODoZa',
         buttonClassName: 'bmap-export-button',
-        web_app_url: 'https://app.buymeapie.com',
+        webAppUrl: 'https://app.buymeapie.com',
         lang: (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2) == 'ru' ? 'ru' : 'en'
     },
     defaultTitle: {
@@ -160,8 +160,8 @@ var BMAP = {
         overlayDialog.setAttribute('id','bmap-export-button-overlay-dialog');
         overlayDialog.innerHTML = BMAP.desktopLogged
             ? '<div class="bmap-export-button-dialog-wrapper"><div class="bmap-export-button-dialog small"><div id="bmap-export-button-close">&times;</div><div class="bmap-export-button-content-done">'
-            + (BMAP.options.lang == 'ru' ? '<div>Список покупок</div><div>"КУПИ БАТОН!"</div><img src="'+BMAP.options.web_app_url+'/images/logo_150.png"><div>Импорт ингредиентов</div><div>Мы добавили ингредиенты в ваш аккаунт<br>на buymeapie.com</div><a href="'+BMAP.options.web_app_url+'" target="_blank">Перейти к списку покупок</a>'
-                : '<div>Shopping list</div><div>"BUY ME A PIE!"</div><img src="'+BMAP.options.web_app_url+'/images/logo_150.png"><div>Ingredients import</div><div>We added the ingredients to your account<br>at buymeapie.com</div><a href="'+BMAP.options.web_app_url+'" target="_blank">Go to the shopping list</a>'
+            + (BMAP.options.lang == 'ru' ? '<div>Список покупок</div><div>"КУПИ БАТОН!"</div><img src="'+BMAP.options.webAppUrl+'/images/logo_150.png"><div>Импорт ингредиентов</div><div>Мы добавили ингредиенты в ваш аккаунт<br>на buymeapie.com</div><a href="'+BMAP.options.webAppUrl+'" target="_blank">Перейти к списку покупок</a>'
+                : '<div>Shopping list</div><div>"BUY ME A PIE!"</div><img src="'+BMAP.options.webAppUrl+'/images/logo_150.png"><div>Ingredients import</div><div>We added the ingredients to your account<br>at buymeapie.com</div><a href="'+BMAP.options.webAppUrl+'" target="_blank">Go to the shopping list</a>'
             ) + '</div></div></div>'
             : '<div class="bmap-export-button-dialog-wrapper"><div class="bmap-export-button-dialog"><div id="bmap-export-button-close">&times;</div><iframe src="" id="bmap-export-button-iframe" class="bmap-export-button-iframe"></iframe></div></div>';
         document.getElementsByTagName('BODY')[0].appendChild(overlayDialog);
@@ -295,7 +295,7 @@ var BMAP = {
                 }
                 callback();
             }
-           iframe.setAttribute('src',BMAP.options.web_app_url+'/recipe_import.html');
+           iframe.setAttribute('src',BMAP.options.webAppUrl+'/recipe_import.html');
         } else {
             callback();
         }
