@@ -295,7 +295,7 @@ var BMAP = {
                 }
                 callback();
             }
-           iframe.setAttribute('src',BMAP.options.web_app_url+'/export_recipe.html');
+           iframe.setAttribute('src',BMAP.options.web_app_url+'/recipe_import.html');
         } else {
             callback();
         }
