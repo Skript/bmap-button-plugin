@@ -262,7 +262,7 @@ var BMAP = {
     },
     postMessage: function(data){
         BMAP.iframe = BMAP.exportIframe(function(){
-            BMAP.iframe.contentWindow.postMessage(JSON.stringify(data), '*');
+            BMAP.iframe.contentWindow.postMessage(JSON.stringify(data), BMAP.options.webAppUrl);
         });
     },
     callbackMessage: function(event){
