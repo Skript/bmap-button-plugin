@@ -210,11 +210,9 @@ var BMAP = {
         }
 
         var export_data = {};
-        export_data['lists'] = [{"name":recipe_name,"active":true,"items":items}];
+        export_data['lists'] = [{type:"recipe",sourceUrl:document.location.href,"name":recipe_name,"active":true,"items":items}];
         export_data['$desktop_deepview'] = 'import_ingredients_' + BMAP.options.lang;
         export_data['$custom_sms_text'] =  BMAP.sms_text[BMAP.options.lang] + ' {{ link }}';
-        export_data['type'] = 'recipe';
-        export_data['sourceUrl'] = document.location.href;
 
         if (BMAP.desktopLogged) {
             BMAP.setupDesktopButton(button, export_data['lists']);
