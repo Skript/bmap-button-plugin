@@ -81,7 +81,7 @@ var BMAP = {
         .bmap-export-button-dialog .bmap-export-button-content-done div:nth-child(4) { font-size: 20px; }\
         .bmap-export-button-dialog .bmap-export-button-content-done div:nth-child(5) { font-size: 16px; color: #888; margin: 20px 0px 40px; }\
         .bmap-export-button-dialog .bmap-export-button-content-done img { margin: 30px 0 20px 0 }\
-        .bmap-export-button-dialog .bmap-export-button-content-done a { display: inline-block; padding: 10px 30px; background: #0299cc; border-radius: 4px; color: #fff; text-decoration: none; font-weight: 100; }\
+        .bmap-export-button-dialog .bmap-export-button-content-done a { display: inline-block; padding: 10px 30px; background: #0299cc; border-radius: 4px; color: #fff; text-decoration: none; font-weight: 400; }\
         .bmap-export-button-dialog-wrapper  {\
             display: table-cell;\
             text-align: center !important;\
