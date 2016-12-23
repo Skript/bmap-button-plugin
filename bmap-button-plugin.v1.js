@@ -28,7 +28,6 @@ var BMAP = {
             text-align: center;\
             vertical-align: middle;\
             white-space: nowrap;\
-            display: inline-block;\
             text-decoration: none;\
             line-height: 40px;\
             background: url(https://buymeapie.com/images/logo.png) no-repeat 10px 50% #0095ff;\
@@ -42,6 +41,8 @@ var BMAP = {
             text-decoration: none;\
             background-color: #40b0ff;\
         }\
+        .bmap-export-button-link { display: none; }\
+        .bmap-export-button-link.bmap-export-button-link-shown { display: inline-block; }\
         #bmap-export-button-overlay-dialog {\
             background-color: rgba(255, 255, 255, 0.75);\
             display: none;\
@@ -244,6 +245,7 @@ var BMAP = {
                 overlayDialog.classList.add('bmap-export-button-dialog-shown');
             });
         }
+        a.classList.add('bmap-export-button-link-shown');
     },
     setupDesktopButton: function(button, recipe){
         var self = this;
@@ -257,6 +259,7 @@ var BMAP = {
                 a.setAttribute('done', true);
             }
         });
+        a.classList.add('bmap-export-button-link-shown');
     },
     postMessage: function(data){
         BMAP.iframe = BMAP.exportIframe(function(){
