@@ -195,7 +195,8 @@ var BMAP = {
         var items = [];
         var name, amount, item;
         var recipe_name = recipe.querySelector('[itemprop=name]').innerText;
-        var itemCollection = recipe.querySelectorAll('[itemprop=ingredients],[itemprop=recipeIngredient]');
+        var schema_ingredient_itemprop = recipe.querySelector('[itemprop=recipeIngredient]') ? 'recipeIngredient' : 'ingredients';
+        var itemCollection = recipe.querySelectorAll('[itemprop='+schema_ingredient_itemprop+']');
 
         for (var i = itemCollection.length - 1; i >= 0; i--) {
             name = itemCollection[i].querySelector('[itemprop=name],.item_name');
