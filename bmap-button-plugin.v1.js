@@ -2,6 +2,7 @@
 
 var BMAP = {
     options: {
+        customButton: false,
         branchKey:'key_live_blf8cbCOBIE1a7eFuCgqFfhdvDpODoZa',
         buttonClassName: 'bmap-export-button',
         webAppUrl: 'https://app.buymeapie.com',
@@ -140,10 +141,10 @@ var BMAP = {
         }
     },
     init: function(options){
-        this.extend(this.options, options, true);
-        branch.init(this.options.branchKey);
         var self = this;
-        this.onDomReady(self, function() {
+        self.extend(self.options, options, true);
+        branch.init(self.options.branchKey);
+        self.onDomReady(self, function() {
             var node = document.createElement("style");
             var textnode = document.createTextNode(self.css);
             node.appendChild(textnode);
@@ -181,7 +182,7 @@ var BMAP = {
     makeButton: function(buttonContainer){
         var buttonTitle = buttonContainer.getAttribute('data-button-title')||this.defaultTitle[this.options.lang];
         var recipe_id = buttonContainer.getAttribute('data-recipe-id');
-        buttonContainer.innerHTML = '<a href="javascript:void(0);" class="bmap-export-button-link" target="_blank">'+buttonTitle+'</a>';
+        if (!BMAP.options.customButton) buttonContainer.innerHTML = '<a href="javascript:void(0);" class="bmap-export-button-link" target="_blank">'+buttonTitle+'</a>';
         this.makeButtonLink(buttonContainer, recipe_id)
     },
     makeButtonLink: function(button, recipe_id){
@@ -232,25 +233,24 @@ var BMAP = {
         }
     },
     setupButtonLink: function(button, link) {
-        var a = button.childNodes[0];
-        a.setAttribute('href',link);
-        if (!this.mobile) {
-            var overlayDialog = document.getElementById('bmap-export-button-overlay-dialog');
-            a.addEventListener('click',function(event){
-                event.preventDefault();
-                var link = a.getAttribute('href');
+        var overlayDialog = document.getElementById('bmap-export-button-overlay-dialog');
+        var a = BMAP.options.customButton ? button : button.childNodes[0];
+        a.addEventListener('click',function(event){
+            event.preventDefault();
+            if (BMAP.mobile) {
+                window.open(link,'_blank');
+            } else {
                 var iframe = document.getElementById('bmap-export-button-iframe');
                 if (iframe.getAttribute('src') != link) {
                     document.getElementById('bmap-export-button-iframe').setAttribute('src',link);
                 }
                 overlayDialog.classList.add('bmap-export-button-dialog-shown');
-            });
-        }
+            }
+        });
         a.classList.add('bmap-export-button-link-shown');
     },
     setupDesktopButton: function(button, recipe){
-        var self = this;
-        var a = button.childNodes[0];
+        var a = BMAP.options.customButton ? button : button.childNodes[0];
         a.addEventListener('click',function(event){
             event.preventDefault();
             if (a.getAttribute('done')){
@@ -260,7 +260,6 @@ var BMAP = {
                 a.setAttribute('done', true);
             }
         });
-        a.classList.add('bmap-export-button-link-shown');
     },
     postMessage: function(data){
         BMAP.iframe = BMAP.exportIframe(function(){
