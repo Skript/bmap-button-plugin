@@ -62,6 +62,7 @@ Available parameters:
 
 * `lang` - language to use. Supported values: `en`, `ru`. By default the plugin tries to obtain the language from the browser.
 * `buttonClassName` - a class name of the DOM objects to search on the page and draw a button inside. Default: `bmap-export-button`.
+* `customButton` -  if you want to use your own button, set this parameter to `true`. DOM objects with the specified class name `buttonClassName` will be used as buttons. Default: `false`.
 
 #### Button-specific parameters
 
@@ -73,7 +74,7 @@ You can specify button-specific parameters as attributes to a button container:
 
 At the moment only one parameter is supported:
 
-* `data-button-title` - a button title.
+* `data-button-title` - a button title. Not used when `customButton` set to `true`.
 
 ### Multiple recipes on the page
 
