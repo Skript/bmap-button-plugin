@@ -238,7 +238,7 @@ var BMAP = {
         a.addEventListener('click',function(event){
             event.preventDefault();
             if (BMAP.mobile) {
-                window.open(link,'_blank');
+                document.location.href = link;
             } else {
                 var iframe = document.getElementById('bmap-export-button-iframe');
                 if (iframe.getAttribute('src') != link) {
