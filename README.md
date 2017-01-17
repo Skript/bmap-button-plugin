@@ -18,7 +18,7 @@ See [an example](https://buymeapie.com/examples/bmap-button-plugin.html).
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) {return;}
           js = d.createElement(s); js.id = id;
-          js.src = "//buymeapie.com/javascripts/plugins/bmap-button-plugin.v1.js";
+          js.src = "https://buymeapie.com/javascripts/plugins/bmap-button-plugin.v1.js";
           fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'bmap-button-plugin'));
   </script>
@@ -52,7 +52,7 @@ You can pass configuration parameters into `BMAP.init()` function as shown below
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
         js = d.createElement(s); js.id = id;
-        js.src = "//buymeapie.com/javascripts/plugins/bmap-button-plugin.v1.js";
+        js.src = "https://buymeapie.com/javascripts/plugins/bmap-button-plugin.v1.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'bmap-button-plugin'));
 </script>
