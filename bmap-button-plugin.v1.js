@@ -4,6 +4,7 @@ var BMAP = {
     options: {
         customButton: false,
         branchKey:'key_live_blf8cbCOBIE1a7eFuCgqFfhdvDpODoZa',
+        branchTags: ['js-plugin'],
         buttonClassName: 'bmap-export-button',
         webAppUrl: 'https://app.buymeapie.com',
         lang: (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2) == 'ru' ? 'ru' : 'en'
@@ -223,7 +224,7 @@ var BMAP = {
             branch.link({
                 campaign: 'Partners',
                 channel: 'bmap-js-plugin',
-                tags: ['import', document.location.host],
+                tags: ['import', document.location.host].concat(BMAP.options.branchTags),
                 feature: 'import',
                 stage: '',
                 data: export_data
