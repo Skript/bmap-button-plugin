@@ -199,6 +199,14 @@ var BMAP = {
         var recipe_name = recipe.querySelector('[itemprop=name]').innerText;
         var schema_ingredient_itemprop = recipe.querySelector('[itemprop=recipeIngredient]') ? 'recipeIngredient' : 'ingredients';
         var itemCollection = recipe.querySelectorAll('[itemprop='+schema_ingredient_itemprop+']');
+        var units = {
+            ru: '(?:ст|ч\.?\s?л)|гр|кг|мл|т|уп|шт|л|(?:кило)?грамм(?:а|ов)?|литр(?:а|ов)?|штук(?:и|а)?|бан(?:ка|ок|ки)|упаков(?:ка|ок|ки)|стакана?',
+            en: 'ml|c|pt|qt|gal|doz|pkg|lb|oz|tsp|tbsp|tbs|t|g|mg|kg|sm|med|lg|sq|(?:milli)?liters?|(?:kilo)?grams?|cups?|pints?|quarts?|gallons?|dozens?|packages?|ounces?|pounds?|teaspoons?|tablespoons?'
+        }
+        var ingredientRegExp = {
+            ru: new RegExp("(.+?)\\s*([\\d¼½][-\\d/\\s,\\.¼½]*(?:" + units.ru + "|))?[\\s\\.,;]*$","i"),
+            en: new RegExp("([-\\d/\\s,\\.¼½]*(?:" + units.en + "|))[\\s\\.,;]*(.+)", "i")
+        }
 
         for (var i = itemCollection.length - 1; i >= 0; i--) {
             name = itemCollection[i].querySelector('[itemprop=name],.item_name');
@@ -206,9 +214,10 @@ var BMAP = {
             if ( name && amount ) {
                 item = { name: name.innerText, amount: amount.innerText || '', group: 0 }
             } else {
-                //TODO: parse name & amount
-                item = itemCollection[i].innerText.split('\n');
-                item = { name: item[0], amount: item[1]||'', group: 0 }
+                item = itemCollection[i].innerText.match(ingredientRegExp[BMAP.options.lang]);
+                item = BMAP.options.lang == 'ru'
+                    ? { name: item[1].trim(), amount: (item[2]||'').trim(), group: 0 }
+                    : { name: item[2].trim(), amount: (item[1]||'').trim(), group: 0 }
             }
             items.push(item);
         }
