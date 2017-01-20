@@ -77,6 +77,8 @@ var BMAP = {
             width: 440px;\
             font-weight: 300;\
             color: #000;\
+            line-height: 1.4em;\
+            font-size:16px;\
         }\
         .bmap-export-button-dialog .bmap-export-button-content-done { text-align: center; }\
         .bmap-export-button-dialog .bmap-export-button-content-done div:nth-child(2) { font-weight: 600; }\
