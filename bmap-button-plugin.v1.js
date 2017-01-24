@@ -216,10 +216,13 @@ var BMAP = {
             if ( name && amount ) {
                 item = { name: name.innerText, amount: amount.innerText || '', group: 0 }
             } else {
-                item = itemCollection[i].innerText.match(ingredientRegExp[BMAP.options.lang]);
-                item = BMAP.options.lang == 'ru'
-                    ? { name: item[1].trim(), amount: (item[2]||'').trim(), group: 0 }
-                    : { name: item[2].trim(), amount: (item[1]||'').trim(), group: 0 }
+                var itemMatch = itemCollection[i].innerText.match(ingredientRegExp.ru);
+                if (itemMatch[2]) {
+                    item = { name: itemMatch[1].trim(), amount: (itemMatch[2]).trim(), group: 0 };
+                } else {
+                    itemMatch = itemCollection[i].innerText.match(ingredientRegExp.en);
+                    item = { name: itemMatch[2].trim(), amount: (itemMatch[1]||'').trim(), group: 0 }
+                }
             }
             items.push(item);
         }
