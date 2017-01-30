@@ -207,7 +207,7 @@ var BMAP = {
         }
         var ingredientRegExp = {
             ru: new RegExp("(.+?)\\s*([\\d¼½][-\\d/\\s,\\.¼½]*(?:" + units.ru + "|))?[\\s\\.,;]*$","i"),
-            en: new RegExp("([-\\d/\\s,\\.¼½]*(?:" + units.en + "|))[\\s\\.,;]*(.+)", "i")
+            en: new RegExp("([-\\d/\\s,\\.¼½]*(?:(?:" + units.en + ")\\s|))[\\s\\.,;]*(.+)", "i")
         }
 
         for (var i = itemCollection.length - 1; i >= 0; i--) {
