@@ -214,16 +214,20 @@ var BMAP = {
             name = itemCollection[i].querySelector('[itemprop=name],.item_name');
             amount = itemCollection[i].querySelector('[itemprop=amount],.item_count');
             if ( name && amount ) {
-                item = { name: name.innerText, amount: amount.innerText || '', group: 0 }
+                name = BMAP.capitalizeFirstLetter(name.innerText);
+                amount = amount.innerText || '';
             } else {
                 var itemMatch = itemCollection[i].innerText.match(ingredientRegExp.ru);
                 if (itemMatch[2]) {
-                    item = { name: itemMatch[1].trim(), amount: (itemMatch[2]).trim(), group: 0 };
+                    name = itemMatch[1];
+                    amount = itemMatch[2];
                 } else {
                     itemMatch = itemCollection[i].innerText.match(ingredientRegExp.en);
-                    item = { name: itemMatch[2].trim(), amount: (itemMatch[1]||'').trim(), group: 0 }
+                    name = itemMatch[2] || '';
+                    amount = itemMatch[1] || '';
                 }
             }
+            item = { name: BMAP.capitalizeFirstLetter(name.trim()), amount: amount.trim(), group: 0 };
             items.push(item);
         }
 
@@ -316,6 +320,9 @@ var BMAP = {
             callback();
         }
         return iframe;
+    },
+    capitalizeFirstLetter: function(str){
+      return str.charAt(0).toUpperCase() + str.slice(1);
     }
 };
 
