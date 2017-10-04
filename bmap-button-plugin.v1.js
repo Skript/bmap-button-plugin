@@ -201,13 +201,10 @@ var BMAP = {
         var recipe_name = recipe.querySelector('[itemprop=name]').innerText;
         var schema_ingredient_itemprop = recipe.querySelector('[itemprop=recipeIngredient]') ? 'recipeIngredient' : 'ingredients';
         var itemCollection = recipe.querySelectorAll('[itemprop='+schema_ingredient_itemprop+']');
-        var units = {
-            ru: '(?:ст|ч\.?\s?л)|гр|кг|мл|т|уп|шт|л|(?:кило)?грамм(?:а|ов)?|литр(?:а|ов)?|штук(?:и|а)?|бан(?:ка|ок|ки)|упаков(?:ка|ок|ки)|стакана?',
-            en: 'ml|c|pt|qt|gal|doz|pkg|lb|oz|tsp|tbsp|tbs|t|g|mg|kg|sm|med|lg|sq|(?:milli)?liters?|(?:kilo)?grams?|cups?|pints?|quarts?|gallons?|dozens?|packages?|ounces?|pounds?|teaspoons?|tablespoons?'
-        }
+        var units = '(?:ст|ч\.?\s?л)|гр|кг|мл|т|уп|шт|л|(?:кило)?грамм(?:а|ов)?|литр(?:а|ов)?|штук(?:и|а)?|бан(?:ка|ок|ки)|упаков(?:ка|ок|ки)|стакана?|ml|c|pt|qt|gal|doz|pkg|lb|oz|tsp|tbsp|tbs|t|g|mg|kg|sm|med|lg|sq|(?:milli)?liters?|(?:kilo)?grams?|cups?|pints?|quarts?|gallons?|dozens?|packages?|ounces?|pounds?|teaspoons?|tablespoons?';
         var ingredientRegExp = {
-            ru: new RegExp("(.+?)\\s*([\\d¼½][-\\d/\\s,\\.¼½]*(?:" + units.ru + "|))?[\\s\\.,;]*$","i"),
-            en: new RegExp("([-\\d/\\s,\\.¼½]*(?:(?:" + units.en + ")\\s|))[\\s\\.,;]*(.+)", "i")
+            name_then_amount: new RegExp("\\s*(.+?)(?:[\\s\\.,;]+([-\\d/\\s,\\.¼½¾⅝]*(?:" + units + ")?))?[\\s\\.,;]*$","i"),
+            amount_then_name: new RegExp("\\s*(?:([-\\d/\\s,\\.¼½¾⅝]*(?:" + units + ")?)[\\s\\.,;]+)?(.+)", "i")
         }
 
         for (var i = itemCollection.length - 1; i >= 0; i--) {
@@ -217,12 +214,12 @@ var BMAP = {
                 name = BMAP.capitalizeFirstLetter(name.innerText);
                 amount = amount.innerText || '';
             } else {
-                var itemMatch = itemCollection[i].innerText.match(ingredientRegExp.ru);
+                var itemMatch = itemCollection[i].innerText.match(ingredientRegExp.name_then_amount);
                 if (itemMatch[2]) {
                     name = itemMatch[1];
                     amount = itemMatch[2];
                 } else {
-                    itemMatch = itemCollection[i].innerText.match(ingredientRegExp.en);
+                    itemMatch = itemCollection[i].innerText.match(ingredientRegExp.amount_then_name);
                     name = itemMatch[2] || '';
                     amount = itemMatch[1] || '';
                 }
