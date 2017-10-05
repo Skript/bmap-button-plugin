@@ -201,10 +201,12 @@ var BMAP = {
         var recipe_name = recipe.querySelector('[itemprop=name]').innerText;
         var schema_ingredient_itemprop = recipe.querySelector('[itemprop=recipeIngredient]') ? 'recipeIngredient' : 'ingredients';
         var itemCollection = recipe.querySelectorAll('[itemprop='+schema_ingredient_itemprop+']');
-        var units = '(?:ст|ч\.?\s?л)|гр|кг|мл|т|уп|шт|л|(?:кило)?грамм(?:а|ов)?|литр(?:а|ов)?|штук(?:и|а)?|бан(?:ка|ок|ки)|упаков(?:ка|ок|ки)|стакана?|ml|c|pt|qt|gal|doz|pkg|lb|oz|tsp|tbsp|tbs|t|g|mg|kg|sm|med|lg|sq|(?:milli)?liters?|(?:kilo)?grams?|cups?|pints?|quarts?|gallons?|dozens?|packages?|ounces?|pounds?|teaspoons?|tablespoons?';
+        var units_regex = "(?:(?:ст|ч)\\.?\\s*л)|гр?|кг|мл|т|уп|шт|л|(?:кило)?грамм(?:а|ов)?|литр(?:а|ов)?|штук(?:и|а)?|бан(?:ка|ок|ки)|упаков(?:ка|ок|ки)|стакана?|ml|c|pt|qt|gal|doz|pkg|lb|oz|tsp|tbsp|tbs|t|g|mg|kg|sm|med|lg|sq|(?:milli)?liters?|(?:kilo)?grams?|cups?|pints?|quarts?|gallons?|dozens?|packages?|ounces?|pounds?|teaspoons?|tablespoons?";
+        var delimiter_regex = "[\\s\\.,;-]";
+        var number_regex = "[-\\d/\\s,\\.¼½¾⅝]";
         var ingredientRegExp = {
-            name_then_amount: new RegExp("\\s*(.+?)(?:[\\s\\.,;]+([-\\d/\\s,\\.¼½¾⅝]*(?:" + units + ")?))?[\\s\\.,;]*$","i"),
-            amount_then_name: new RegExp("\\s*(?:([-\\d/\\s,\\.¼½¾⅝]*(?:" + units + ")?)[\\s\\.,;]+)?(.+)", "i")
+            name_then_amount: new RegExp("\\s*(.+?)(?:" + delimiter_regex +"+(" + number_regex +"*(?:" + units_regex + ")?))?" + delimiter_regex + "*$","i"),
+            amount_then_name: new RegExp("\\s*(?:(" + number_regex + "*(?:" + units_regex + ")?)" + delimiter_regex + "+)?(.+)", "i")
         }
 
         for (var i = itemCollection.length - 1; i >= 0; i--) {
