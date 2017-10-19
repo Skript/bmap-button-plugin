@@ -205,8 +205,8 @@ var BMAP = {
         var delimiter_regex = "[\\s\\.,;-]";
         var number_regex = "[-\\d/\\s,\\.¼½¾⅝]";
         var ingredientRegExp = {
-            name_then_amount: new RegExp("\\s*(.+?)(?:" + delimiter_regex +"+(" + number_regex +"*(?:" + units_regex + ")?))?" + delimiter_regex + "*$","i"),
-            amount_then_name: new RegExp("\\s*(?:(" + number_regex + "*(?:" + units_regex + ")?)" + delimiter_regex + "+)?(.+)", "i")
+            name_then_amount: new RegExp("\\s*(.+?)(?:" + delimiter_regex +"+(" + number_regex +"+(?:" + units_regex + ")?))?" + delimiter_regex + "*$","i"),
+            amount_then_name: new RegExp("\\s*(?:(" + number_regex + "+(?:" + units_regex + ")?)" + delimiter_regex + "+)?(.+)", "i")
         }
 
         for (var i = itemCollection.length - 1; i >= 0; i--) {
